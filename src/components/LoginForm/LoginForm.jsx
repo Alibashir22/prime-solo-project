@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
   const errors = useSelector(store => store.errors);
   const dispatch = useDispatch();
 
@@ -17,6 +18,7 @@ function LoginForm() {
         payload: {
           username: username,
           password: password,
+
         },
       });
     } else {
@@ -34,7 +36,7 @@ function LoginForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
+          Email:
           <input
             type="text"
             name="username"
@@ -56,6 +58,7 @@ function LoginForm() {
           />
         </label>
       </div>
+      
       <div>
         <input className="btn" type="submit" name="submit" value="Log In" />
       </div>
