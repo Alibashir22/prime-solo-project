@@ -48,7 +48,58 @@ INSERT INTO "workout_exercise" ("exercise_id", "workout_id")
 SELECT exercise_id::bigint, workout_id
 FROM new_workout, UNNEST($4::bigint[]) AS exercise_id;
 `
-  pool.query(query, [req.user.id, req.body.workout_date, req.body.notes,req.body.exercises_id]).then(() => res.sendStatus(200)).catch((error) =>{ console.log(error); res.sendStatus(500)})
+  pool.query(query, [req.user.id, req.body.workout_date, req.body.notes, req.body.exercises_id]).then(() => res.sendStatus(200)).catch((error) => { console.log(error); res.sendStatus(500) })
 });
+
+/**
+ // edit a workout
+ */
+router.patch('/:id', (req, res) => {
+  pool.query('BEGIN')
+    .then(() => {
+      // Update workout details
+      return pool.query(
+        `UPDATE "workout"
+             SET "workout_date" = $1,
+                 "notes" = $2
+             WHERE "id" = $3`,
+        [req.body.workout_date, req.body.notes, req.params.id]
+      )
+        .then(() => {
+          //  Remove existing exercises for this workout
+          return pool.query(
+            `DELETE FROM "workout_exercise"
+               WHERE "workout_id" = $1`,
+            [req.params.id]
+          );
+        })
+        .then(() => {
+          //  Insert new exercises
+          return pool.query(
+            `INSERT INTO "workout_exercise" ("exercise_id", "workout_id")
+               SELECT exercise_id, $1
+               FROM UNNEST($2::bigint[]) AS exercise_id`,
+            [req.params.id, req.body.exercises_id]
+          );
+        })
+        .then(() => {
+          return pool.query('COMMIT');
+        })
+        .then(() => {
+
+          res.sendStatus(200);
+        })
+        .catch(error => {
+          return pool.query('ROLLBACK')
+            .then(() => {
+
+              console.error('Error updating workout:', error);
+              res.sendStatus(500);
+            });
+        });
+    });
+})
+
+
 
 module.exports = router;
