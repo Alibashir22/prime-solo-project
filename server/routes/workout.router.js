@@ -8,8 +8,8 @@ const router = express.Router();
 /**
  get all workout history for user
  */
-router.get('/',rejectUnauthenticated, (req, res) => {
-  const query=`SELECT
+router.get('/', rejectUnauthenticated, (req, res) => {
+  const query = `SELECT
     w.id AS workout_id,
     w.workout_date,
     w.notes,
@@ -26,19 +26,29 @@ GROUP BY
     w.id, w.workout_date, w.notes
 ORDER BY
     w.id;`
-    pool.query(query,[req.user.id]).then((result)=>(
-      res.send(result.rows)
-    )).catch((error)=>{
-      console.log(error)
-      res.sendStatus(500)
-    })
+  pool.query(query, [req.user.id]).then((result) => (
+    res.send(result.rows)
+  )).catch((error) => {
+    console.log(error)
+    res.sendStatus(500)
+  })
 });
 
 /**
  create a new workout
  */
 router.post('/', (req, res) => {
-  // POST route code here
+  // when creating a workout. we shall Receive exercises id's from frontend
+  const query = `WITH new_workout AS (
+    INSERT INTO "workout" ("user_id", "workout_date", "notes")
+    VALUES ($1, $2, $3)
+    RETURNING "id" AS workout_id
+)
+INSERT INTO "workout_exercise" ("exercise_id", "workout_id")
+SELECT exercise_id::bigint, workout_id
+FROM new_workout, UNNEST($4::bigint[]) AS exercise_id;
+`
+  pool.query(query, [req.user.id, req.body.workout_date, req.body.notes,req.body.exercises_id]).then(() => res.sendStatus(200)).catch((error) =>{ console.log(error); res.sendStatus(500)})
 });
 
 module.exports = router;
