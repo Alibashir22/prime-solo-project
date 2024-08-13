@@ -99,6 +99,44 @@ router.patch('/:id', (req, res) => {
         });
     });
 })
+/**
+ // delete a workout
+ */
+router.delete('/:id', (req, res) => {
+  pool.query('BEGIN')
+    .then(() => {
+      // delete workout exercises
+      return pool.query(
+        `DELETE FROM "workout_exercise"
+WHERE "workout_id" = $1;`,
+        [ req.params.id]
+      )
+        .then(() => {
+          // delete workout
+          return pool.query(
+            `DELETE FROM "workout"
+WHERE "id" = $1;`,
+            [req.params.id]
+          );
+        })
+        .then(() => {
+          return pool.query('COMMIT');
+        })
+        .then(() => {
+
+          res.sendStatus(200);
+        })
+        .catch(error => {
+          return pool.query('ROLLBACK')
+            .then(() => {
+
+              console.error('Error deleting workout:', error);
+              res.sendStatus(500);
+            });
+        });
+    });
+})
+
 
 
 
