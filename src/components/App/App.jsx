@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import CreateWorkout from '../CreateWorkout/CreateWorkout';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,13 @@ function App() {
             path="/history"
           >
             <UserPage />
+          </ProtectedRoute>
+          <ProtectedRoute
+
+            exact
+            path="/create"
+          >
+            <CreateWorkout />
           </ProtectedRoute>
 
 
@@ -80,7 +88,7 @@ function App() {
             }
           </Route>
 
-          
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
