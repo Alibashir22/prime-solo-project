@@ -110,3 +110,59 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+ h1, h2, h3{
+  color: #334155;
+  margin: 0;
+  padding: 0;
+ }
+ h2{
+  font-size: 1.5rem;
+ }
+ .h3{
+  margin-bottom: -50px !important;
+  
+ }
+ .workout{
+  border: 1px solid #002D62;
+  border-radius: 15px;
+  padding: 25px;
+  position: relative;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+ }
+ .cards{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+ }
+ .exercises{
+  list-style: none;
+  display: inline-flex;
+  padding-left: 0;
+  padding-top: 0;
+  gap: 10px;
+  margin-top: 5px;
+ }
+ .exercises li{
+background-color: #335781;
+padding: 5px 10px;
+border-radius: 15px;
+color: #efefef;
+ }
+ .workout h2{
+  margin-bottom: 20px;
+ }
+ h1{
+  margin-bottom: 30px;
+ }
+ p{
+  color: #475569;
+  font-weight: 500;
+  margin-top: 5px;
+ }
+ .buttons{
+  display: flex;
+  justify-content: space-between;
+ }
