@@ -180,3 +180,35 @@ color: #efefef;
   right: 50px;
   text-decoration: none;
  }
+ .createpage h1{
+  text-align: center;
+ }
+ .createform{
+  border: 1px solid #002D62;
+  padding: 30px;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+ }
+ .group{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+ }
+.exercises{
+  position: relative;
+  z-index: 30;
+}
+.notes{
+  position: relative;
+  z-index: 20;
+}
+.submit{
+  position: static;
+  width: 100%;
+  margin-top: 20px;
+}
+ 
