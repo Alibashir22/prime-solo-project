@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useSelector } from 'react-redux';
 import Workout from './workout';
+import { Link } from 'react-router-dom';
 
 function UserPage() {
   const user = useSelector((store) => store.user);
@@ -27,6 +28,7 @@ function UserPage() {
   ]
   return (
     <div className="container">
+      <Link to="/create" className="create">Create Workout</Link>
       <h1>My Workout History</h1>
       <div className='cards'>{sampleworkouts.map((workout) => (
         <Workout workout={workout} />
