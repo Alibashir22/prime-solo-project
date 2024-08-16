@@ -1,5 +1,6 @@
 import Button from '@mui/material/Button';
 function Workout({ workout }) {
+    //this is a component for showing one workout
     return <div className='workout'>
         <h2>{`${new Date(workout.workout_date).toDateString()} workout session`}</h2>
         <div><h3>Exercises</h3>

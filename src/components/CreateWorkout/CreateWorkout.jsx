@@ -4,6 +4,7 @@ import Select from "react-select";
 import { useState } from "react";
 import dayjs from "dayjs";
 function CreateWorkout() {
+    //this is a list off all exercises on the database
   const allexercises = [
     { value: "1", label: "Push-up" },
     { value: "2", label: "Squat" },
@@ -21,6 +22,7 @@ function CreateWorkout() {
     { value: "14", label: "Mountain Climber" },
     { value: "15", label: "Crunch" },
   ];
+  //created local states for the workout inputs
   const [workoutdate,setworkoutdate]=useState(dayjs())
   const [notes,setnotes]=useState("")
   const [exercises,setexercises]=useState([])

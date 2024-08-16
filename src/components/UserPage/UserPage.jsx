@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 function UserPage() {
   const user = useSelector((store) => store.user);
+  //store the workout history of the user
   const sampleworkouts = [
     {
       workout_id: 1,
