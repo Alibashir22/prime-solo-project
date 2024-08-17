@@ -1,5 +1,9 @@
 import Button from '@mui/material/Button';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 function Workout({ workout }) {
+    const history=useHistory()
+    const dispatch=useDispatch()
     //this is a component for showing one workout
     return <div className='workout'>
         <h2>{`${new Date(workout.workout_date).toDateString()} workout session`}</h2>
@@ -13,9 +17,18 @@ function Workout({ workout }) {
         <p>{workout.notes}</p></div>
         
         <div className='buttons'>
-            <Button variant="outlined" color='info'>Edit</Button>
-            <Button variant="outlined">Reuse</Button>
-            <Button variant="outlined" color='error'>Delete</Button>
+            <Button variant="outlined" color='info' onClick={()=>history.push('/create?edit='+workout.id)}>Edit</Button>
+            <Button variant="outlined" onClick={()=>history.push('/create?reuse='+workout.id)}>Reuse</Button>
+            <Button variant="outlined" color='error' onClick={()=>{
+                if(window.confirm('are you sure you want to delete this workout?')){
+                    dispatch({
+                        type:"DELETE_WORKOUT",
+                        payload:{
+                            id:workout.id
+                        }
+                    })
+                }
+            }}>Delete</Button>
 
         </div>
 
