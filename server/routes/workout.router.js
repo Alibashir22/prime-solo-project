@@ -35,6 +35,31 @@ ORDER BY
 });
 
 /**
+ //get one workout
+ */
+ router.get('/:id', rejectUnauthenticated, (req, res) => {
+  const query = `SELECT
+    w.id AS workout_id,
+    w.workout_date,
+    w.notes,
+    STRING_AGG(e.name, ', ') AS exercises
+FROM
+    workout w
+JOIN
+    workout_exercise we ON w.id = we.workout_id
+JOIN
+    exercise e ON we.exercise_id = e.id
+WHERE
+    w.id = $1;`
+  pool.query(query, [req.params.id]).then((result) => (
+    res.send(result.rows[0])
+  )).catch((error) => {
+    console.log(error)
+    res.sendStatus(500)
+  })
+});
+
+/**
  create a new workout
  */
 router.post('/', (req, res) => {

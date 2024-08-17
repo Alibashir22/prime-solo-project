@@ -18,7 +18,7 @@ function* fetchWorkoutHistory() {
     console.log(' request failed', error);
   }
 }
-function* fetchOneWorkout() {
+function* fetchOneWorkout(action) {
   try {
     const config = {
       headers: { 'Content-Type': 'application/json' },
@@ -26,7 +26,7 @@ function* fetchOneWorkout() {
     };
 
     
-    const response = yield axios.get('/api/workout', config);
+    const response = yield axios.get('/api/workout/'+action.payload.id, config);
 
     
     yield put({ type: 'SET_WORKOUT_HISTORY', payload: response.data });
@@ -58,7 +58,7 @@ function* editWorkout(action) {
     };
 
     
-    const response = yield axios.put('/api/workout'+action.payload.id,action.payload, config);
+    const response = yield axios.put('/api/workout/'+action.payload.id,action.payload, config);
 
     
     yield put({ type: 'FETCH_WORKOUT' });
@@ -74,7 +74,7 @@ function* deleteWorkout(action) {
     };
 
     
-    const response = yield axios.delete('/api/workout'+action.payload.id,config);
+    const response = yield axios.delete('/api/workout/'+action.payload.id,config);
 
     
     yield put({ type: 'FETCH_WORKOUT' });
