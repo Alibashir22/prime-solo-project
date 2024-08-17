@@ -18,9 +18,26 @@ function* fetchWorkoutHistory() {
     console.log(' request failed', error);
   }
 }
+function* createNewWorkout(action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    
+    const response = yield axios.post('/api/workout',action.payload, config);
+
+    
+    yield put({ type: 'FETCH_WORKOUT' });
+  } catch (error) {
+    console.log(' request failed', error);
+  }
+}
 
 function* workoutSaga() {
   yield takeLatest('FETCH_WORKOUT', fetchWorkoutHistory);
+  yield takeLatest('CREATE_WORKOUT', createNewWorkout);
 }
 
 export default workoutSaga;
