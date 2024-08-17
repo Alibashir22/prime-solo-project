@@ -18,6 +18,22 @@ function* fetchWorkoutHistory() {
     console.log(' request failed', error);
   }
 }
+function* fetchOneWorkout() {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    
+    const response = yield axios.get('/api/workout', config);
+
+    
+    yield put({ type: 'SET_WORKOUT_HISTORY', payload: response.data });
+  } catch (error) {
+    console.log(' request failed', error);
+  }
+}
 function* createNewWorkout(action) {
   try {
     const config = {
@@ -72,6 +88,7 @@ function* workoutSaga() {
   yield takeLatest('CREATE_WORKOUT', createNewWorkout);
   yield takeLatest('EDIT_WORKOUT', editWorkout);
   yield takeLatest('DELETE_WORKOUT', deleteWorkout);
+  yield takeLatest('FETCH_ONE_WORKOUT', fetchOneWorkout);
 }
 
 export default workoutSaga;
