@@ -25,7 +25,7 @@ WHERE
 GROUP BY
     w.id, w.workout_date, w.notes
 ORDER BY
-    w.id;`
+    w.id DESC;`
   pool.query(query, [req.user.id]).then((result) => (
     res.send(result.rows)
   )).catch((error) => {
@@ -50,7 +50,11 @@ JOIN
 JOIN
     exercise e ON we.exercise_id = e.id
 WHERE
-    w.id = $1;`
+    w.id = $1
+    GROUP BY
+    w.id, w.workout_date, w.notes
+ORDER BY
+    w.id;`
   pool.query(query, [req.params.id]).then((result) => (
     res.send(result.rows[0])
   )).catch((error) => {

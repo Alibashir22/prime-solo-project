@@ -17,14 +17,14 @@ function Workout({ workout }) {
         <p>{workout.notes}</p></div>
         
         <div className='buttons'>
-            <Button variant="outlined" color='info' onClick={()=>history.push('/create?edit='+workout.id)}>Edit</Button>
-            <Button variant="outlined" onClick={()=>history.push('/create?reuse='+workout.id)}>Reuse</Button>
+            <Button variant="outlined" color='info' onClick={()=>history.push('/create?edit='+workout.workout_id)}>Edit</Button>
+            <Button variant="outlined" onClick={()=>history.push('/create?reuse='+workout.workout_id)}>Reuse</Button>
             <Button variant="outlined" color='error' onClick={()=>{
                 if(window.confirm('are you sure you want to delete this workout?')){
                     dispatch({
                         type:"DELETE_WORKOUT",
                         payload:{
-                            id:workout.id
+                            id:workout.workout_id
                         }
                     })
                 }

@@ -58,7 +58,7 @@ function* editWorkout(action) {
     };
 
     
-    const response = yield axios.put('/api/workout/'+action.payload.id,action.payload, config);
+    const response = yield axios.patch('/api/workout/'+action.payload.id,action.payload, config);
 
     
     yield put({ type: 'FETCH_WORKOUT' });

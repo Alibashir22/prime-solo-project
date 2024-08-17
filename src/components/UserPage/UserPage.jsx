@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Workout from './workout';
 import { Link } from 'react-router-dom';
 import store from '../../redux/store';
@@ -8,8 +8,13 @@ import store from '../../redux/store';
 function UserPage() {
   const user = useSelector((store) => store.user);
   const workoutHistory=useSelector((store)=>store.workout)
+  const dispatch=useDispatch()
   //store the workout history of the user
-  
+  useEffect(()=>{
+    dispatch({
+      type:"FETCH_WORKOUT"
+    })
+  },[])
   return (
     <div className="container">
       <Link to="/create" className="create">Create Workout</Link>
