@@ -3,35 +3,18 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Workout from './workout';
 import { Link } from 'react-router-dom';
+import store from '../../redux/store';
 
 function UserPage() {
   const user = useSelector((store) => store.user);
+  const workoutHistory=useSelector((store)=>store.workout)
   //store the workout history of the user
-  const sampleworkouts = [
-    {
-      workout_id: 1,
-      workout_date: "2024-08-10",
-      notes: "this is my history page",
-      exercises: "Push-up, Squat"
-    },
-    {
-      workout_id: 2,
-      workout_date: "2024-08-10",
-      notes: "this is my history page",
-      exercises: "Push-up, Squat"
-    },
-    {
-      workout_id: 3,
-      workout_date: "2024-08-10",
-      notes: "this is my history page",
-      exercises: "Push-up, Squat"
-    }
-  ]
+  
   return (
     <div className="container">
       <Link to="/create" className="create">Create Workout</Link>
       <h1>My Workout History</h1>
-      <div className='cards'>{sampleworkouts.map((workout) => (
+      <div className='cards'>{workoutHistory.map((workout) => (
         <Workout workout={workout} />
       ))}</div>
 
