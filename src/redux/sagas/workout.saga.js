@@ -29,7 +29,7 @@ function* fetchOneWorkout(action) {
     const response = yield axios.get('/api/workout/'+action.payload.id, config);
 
     
-    yield put({ type: 'SET_WORKOUT_HISTORY', payload: response.data });
+    yield put({ type: 'SET_ONE_WORKOUT', payload: response.data });
   } catch (error) {
     console.log(' request failed', error);
   }

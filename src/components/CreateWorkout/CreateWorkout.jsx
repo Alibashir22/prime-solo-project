@@ -3,6 +3,10 @@ import TextField from "@mui/material/TextField";
 import Select from "react-select";
 import { useState } from "react";
 import dayjs from "dayjs";
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import store from '../../redux/store';
 function CreateWorkout() {
     //this is a list off all exercises on the database
   const allexercises = [
