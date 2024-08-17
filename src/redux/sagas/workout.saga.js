@@ -50,11 +50,28 @@ function* editWorkout(action) {
     console.log(' request failed', error);
   }
 }
+function* deleteWorkout(action) {
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    };
+
+    
+    const response = yield axios.delete('/api/workout'+action.payload.id,config);
+
+    
+    yield put({ type: 'FETCH_WORKOUT' });
+  } catch (error) {
+    console.log(' request failed', error);
+  }
+}
 
 function* workoutSaga() {
   yield takeLatest('FETCH_WORKOUT', fetchWorkoutHistory);
   yield takeLatest('CREATE_WORKOUT', createNewWorkout);
   yield takeLatest('EDIT_WORKOUT', editWorkout);
+  yield takeLatest('DELETE_WORKOUT', deleteWorkout);
 }
 
 export default workoutSaga;
