@@ -145,12 +145,15 @@ input {
   padding-top: 0;
   gap: 10px;
   margin-top: 5px;
+  flex-wrap: wrap;
  }
  .exercises li{
 background-color: #335781;
 padding: 5px 10px;
 border-radius: 15px;
 color: #efefef;
+width: max-content;
+height: max-content;
  }
  .workout h2{
   margin-bottom: 20px;
