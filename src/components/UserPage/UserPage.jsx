@@ -14,6 +14,10 @@ function UserPage() {
     dispatch({
       type:"FETCH_WORKOUT"
     })
+    dispatch({
+      type: "CLEAR_WORKOUT",
+     
+    });
   },[])
   return (
     <div className="container">

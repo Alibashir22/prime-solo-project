@@ -26,6 +26,26 @@ function CreateWorkout() {
     { value: "13", label: "Tricep Dip" },
     { value: "14", label: "Mountain Climber" },
     { value: "15", label: "Crunch" },
+    { value: "16", label: "Russian Twist" },
+    { value: "17", label: "Box Jump" },
+    { value: "18", label: "Kettlebell Swing" },
+    { value: "19", label: "Glute Bridge" },
+    { value: "20", label: "Sit-up" },
+    { value: "21", label: "Dumbbell Fly" },
+    { value: "22", label: "Hip Thrust" },
+    { value: "23", label: "Dumbbell Row" },
+    { value: "24", label: "Jump Rope" },
+    { value: "25", label: "Lat Pulldown" },
+    { value: "26", label: "Wall Sit" },
+    { value: "27", label: "Calf Raise" },
+    { value: "28", label: "Romanian Deadlift" },
+    { value: "29", label: "Farmers Walk" },
+    { value: "30", label: "Reverse Crunch" },
+    { value: "31", label: "High Knees" },
+    { value: "32", label: "Skater Jump" },
+    { value: "33", label: "Side Plank" },
+    { value: "34", label: "Step-up" },
+    { value: "35", label: "Hanging Leg Raise" },
   ];
   //created local states for the workout inputs
   const [workoutdate, setworkoutdate] = useState(dayjs());
@@ -35,7 +55,7 @@ function CreateWorkout() {
   const dispatch = useDispatch();
   const history = useHistory();
   const oneworkout = useSelector((store) => store.oneworkout);
-console.log(oneworkout)
+  console.log(oneworkout);
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
   const editId = searchParams.get("edit");
@@ -141,6 +161,7 @@ console.log(oneworkout)
             onChange={(e) => setnotes(e.target.value)}
             label="Notes"
             variant="outlined"
+            autoComplete="on"
           />
         </div>
         <button className="create submit" type="submit">
